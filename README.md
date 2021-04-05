@@ -34,7 +34,7 @@ The files structure of the project looks like this
 
 ```
 project
-│   README.md
+│	README.md
 │	.gitattributes
 │	.gitignore
 │	sync.py
