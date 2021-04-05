@@ -19,6 +19,7 @@ We will stick to this version untill new engine feature updates are required for
 ## WebGL/Universal Render Pipeline
 Currently the main target platform is a WebGL(2.0) application.
 The project is set up to use the [Universal Render Pipeline](https://unity.com/srp/universal-render-pipeline), focussing on high performance for lower end machines. Please note that shaders/materials have specific requirements in order to work in this render pipeline.
+
 ## Code convention 
 All the project code and comments should be written in English. Content text is written in Dutch.
 
@@ -27,9 +28,38 @@ For C#/.NET coding conventions please refer to the Microsoft conventions:
 For variable naming please refer to:
 [https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions)
 
+## Project Setup 
+
+The files structure of the project looks like this
+
+```
+project
+│   README.md
+│	.gitattributes
+│   .gitignore    
+│	sync.py
+└───3DNetherlands
+    └───Assets
+        └───3DAmsterdam
+	        Config3DAmsterdam_production
+        └───3DUtrecht
+			Config3DUtrecht
+        └───Netherlands3D
+        └───WebGLTemplates
+            └───Fullscreen3DAmsterdam
+            └───Fullscreen3DUtrecht
+```
+
+The directory Netherlands3D contains all reusable code, whereas 3DAmsterdam and 3DUtrecht define the city specific implementations. This includes a config file that contains the relative center coordinate, and the website URL and other settings.
+
+The 3DUtrecht files are located in the 3Dutrecht directory and  the html template files located in Fullscreen3Dutrecht.
+
+The 3DAmsterdam core files are synchronized using the Python sync.py script. 
+This will copy the files from the GIT directory of 3DAmsterdam develop branch.
+
 ## Tile System
 
-The platform uses a tile based system consisting of 1km by 1km tiles. The handling of the tiles is iniated by the TileHandler which resides under the /Layers in the scene and needs to be configured with the active Layers that implement the Layer baseclass. 
+The platform uses a tile based system consisting of 1km by 1km tiles. The handling of the tiles is initiated by the TileHandler which resides under the /Layers in the scene and needs to be configured with the active Layers that implement the Layer baseclass. 
 
 We currently have 4 implemented Layers which are 
 
@@ -59,4 +89,6 @@ To create assets the workflow is as follows
   This will create binary files and needs to be copied to the webserver that will serve them.
 
 Note, the generation these assets can take some time on your computer.
+
+
 
