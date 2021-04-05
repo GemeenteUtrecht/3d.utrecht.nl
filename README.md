@@ -36,7 +36,7 @@ The files structure of the project looks like this
 project
 │   README.md
 │	.gitattributes
-│   .gitignore
+│	.gitignore
 │	sync.py
 └───3DNetherlands
     └───Assets
