@@ -50,12 +50,14 @@ project
           └───Fullscreen3DUtrecht
 ```
 
-The directory Netherlands3D contains all reusable code, whereas 3DAmsterdam and 3DUtrecht define the city specific implementations. This includes a config file that contains the relative center coordinate, and the website URL and other settings.
+The directory Netherlands3D contains all reusable code, whereas 3DAmsterdam and 3DUtrecht define the city specific implementations. This includes a config file that contains the relative center coordinate, the website URL and other settings.
 
-The 3DUtrecht files are located in the 3Dutrecht directory and  the html template files located in Fullscreen3Dutrecht.
+The 3DUtrecht files are located in the 3Dutrecht directory and  the html template files located in Fullscreen3DUtrecht.
 
-The 3DAmsterdam core files are synchronized using the Python sync.py script. 
-This will copy the files from the GIT directory of 3DAmsterdam develop branch.
+The 3DAmsterdam core files are synchronized using the python sync.py script. 
+This will copy the files from the GIT directory of the 3DAmsterdam develop branch.
+
+The python sync script was chosen as a simple solution to use a nested Git repository file structure ( 3DUtrecht & 3DAmsterdam) where solutions like Git SubModule or Git SubTree proofed to be too complex.  Also the python script allows to be more flexible.
 
 ## Tile System
 
