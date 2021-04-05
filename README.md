@@ -34,20 +34,20 @@ The files structure of the project looks like this
 
 ```
 project
-│	README.md
-│	.gitattributes
-│	.gitignore
-│	sync.py
+│   README.md
+│   .gitattributes
+│   .gitignore
+│   sync.py
 └───3DNetherlands
     └───Assets
-        └───3DAmsterdam
-	        Config3DAmsterdam_production
-        └───3DUtrecht
-			Config3DUtrecht
-        └───Netherlands3D
-        └───WebGLTemplates
-            └───Fullscreen3DAmsterdam
-            └───Fullscreen3DUtrecht
+      └───3DAmsterdam
+          Config3DAmsterdam_production
+      └───3DUtrecht
+          Config3DUtrecht
+      └───Netherlands3D
+      └───WebGLTemplates
+          └───Fullscreen3DAmsterdam
+          └───Fullscreen3DUtrecht
 ```
 
 The directory Netherlands3D contains all reusable code, whereas 3DAmsterdam and 3DUtrecht define the city specific implementations. This includes a config file that contains the relative center coordinate, and the website URL and other settings.
