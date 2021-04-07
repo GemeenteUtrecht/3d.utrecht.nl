@@ -36,7 +36,7 @@ The files structure of the project looks like this
 3DAmsterdam.fork
 └───3DAmsterdam
     
-project
+3d.utrecht.nl
 │   README.md
 │   .gitattributes
 │   .gitignore
