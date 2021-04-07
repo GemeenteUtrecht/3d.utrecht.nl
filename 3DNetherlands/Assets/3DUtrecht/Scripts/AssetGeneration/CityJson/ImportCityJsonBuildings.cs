@@ -8,6 +8,7 @@ using ConvertCoordinates;
 using SimpleJSON;
 using System;
 using System.Threading;
+using Netherlands3D.AssetGeneration.CityJSON;
 
 namespace Amsterdam3D.AssetGeneration.CityJSON
 {
