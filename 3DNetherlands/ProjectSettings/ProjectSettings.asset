@@ -17,7 +17,7 @@ PlayerSettings:
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
-  m_ShowUnitySplashScreen: 0
+  m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 1
@@ -661,7 +661,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    Build: 1
+    Build: 0
     UNet: 1
   luminIcon:
     m_Name: 
@@ -675,10 +675,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 3af3d3a2-3882-4600-8a6a-b392403e1cf6
+  cloudProjectId: 9f189369-2b2d-49bf-8a8f-4a297bac8c79
   framebufferDepthMemorylessMode: 0
-  projectName: 3D Amsterdam
-  organizationId: gemeente-amsterdam-3d
+  projectName: 3D Utrecht
+  organizationId: unity_8o2dczjbjtd9ea
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 1
   disableOldInputManagerSupport: 0
