@@ -53,14 +53,46 @@ The files structure of the project looks like this
           └───Fullscreen3DUtrecht
 ```
 
-The directory Netherlands3D contains all reusable code, whereas 3DAmsterdam and 3DUtrecht define the city specific implementations. This includes a config file that contains the relative center coordinate, the website URL and other settings.
+The directory Netherlands3D contains the core codebase, whereas 3DAmsterdam and 3DUtrecht define the city specific implementations. This includes a config file that contains the relative center coordinate, the website URL and other settings.
 
-The 3DUtrecht files are located in the 3Dutrecht directory and  the html template files located in Fullscreen3DUtrecht.
+The 3DUtrecht files are located in the 3Dutrecht directory and the Webgl html template files located in Fullscreen3DUtrecht.
 
 The 3DAmsterdam core files are synchronized using the python sync.py script. 
-This will copy the files from the GIT directory of the 3DAmsterdam develop branch.
+This will copy the files under 3DAmsterdam from the GIT develop branch into the 3DNetherlands directory
 
 The python sync script was chosen as a simple solution to use a nested Git repository file structure ( 3DUtrecht & 3DAmsterdam) where solutions like Git SubModule or Git SubTree proofed to be too complex.  Also the python script allows to be more flexible.
+
+
+
+## Unity Input System
+
+The project uses the new Unity input system called Input Action Assets. The input mappings are defined in 
+`\Assets\Netherlands3D\Input\3DNetherlands.inputactions`
+
+This will then generate a c# class that will be used in 
+`\Assets\Netherlands3D\Input\ActionHandler.cs`
+
+## Local Test WebGl build
+
+In order to locally test a build you start your own http server. If you have npm installed you can use the [http-server](https://www.npmjs.com/package/http-server) package and run it in the build directory
+
+```
+http.server
+```
+Or if you have [Python](https://www.google.com)  installed you can run
+
+
+```
+python -m http.server
+```
+
+You also need to install a CORS plugin to make it work
+
+https://microsoftedge.microsoft.com/addons/detail/allow-cors-accesscontro/bhjepjpgngghppolkjdhckmnfphffdag
+
+https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
+
+
 
 ## Tile System
 
