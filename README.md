@@ -57,7 +57,7 @@ To setup the file structure the following steps should be performed
 
 1. Fork https://github.com/Amsterdam/3DAmsterdam and clone to 3DAmsterdam.fork
 
-2. Create directory 3d.utrecht.nl, this will also the place to store the README.MD file
+2. Create directory 3d.utrecht.nl. This is also the location to place the README.MD file
 
 3. Copy the files from 3DAmsterdam.fork\3DAmsterdam to 3d.utrecht.nl\3DNetherlands
 
@@ -70,7 +70,7 @@ To setup the file structure the following steps should be performed
    (to create the symbolic links you need to open a command prompt and run it as Administrator)
 ```
 cd \3d.utrecht.nl\3DNetherlands\Assets
-mklink /d 3DAmsterdam \3DAmsterdam.fork\3DAmsterdam\Assets\3DAmsteram
+mklink /d 3DAmsterdam \3DAmsterdam.fork\3DAmsterdam\Assets\3DAmsterdam
 mklink /d Netherlands3D \3DAmsterdam.fork\3DAmsterdam\Assets\Netherlands3D
 ```
 
@@ -141,8 +141,3 @@ To create assets the workflow is as follows
 Note, the generation these assets can take some time on your computer.
 
 
-
-
-```
-
-```
