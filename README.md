@@ -30,7 +30,7 @@ For variable naming please refer to:
 
 ## Project Setup 
 
-The files structure of the project looks like this
+The files structure of the project looks like this. 
 
 ```
 3DAmsterdam.fork
@@ -53,16 +53,29 @@ The files structure of the project looks like this
           └───Fullscreen3DUtrecht
 ```
 
-The directory Netherlands3D contains the core codebase, whereas 3DAmsterdam and 3DUtrecht define the city specific implementations. This includes a config file that contains the relative center coordinate, the website URL and other settings.
+To setup the file structure the following steps should be performed
 
-The 3DUtrecht files are located in the 3Dutrecht directory and the Webgl html template files located in Fullscreen3DUtrecht.
+1. Fork https://github.com/Amsterdam/3DAmsterdam and clone to 3DAmsterdam.fork
 
-The 3DAmsterdam core files are synchronized using the python sync.py script. 
-This will copy the files under 3DAmsterdam from the GIT develop branch into the 3DNetherlands directory
+2. Create directory 3d.utrecht.nl, this will also the place to store the README.MD file
 
-The python sync script was chosen as a simple solution to use a nested Git repository file structure ( 3DUtrecht & 3DAmsterdam) where solutions like Git SubModule or Git SubTree proofed to be too complex.  Also the python script allows to be more flexible.
+3. Copy the files from 3DAmsterdam.fork\3DAmsterdam to 3d.utrecht.nl\3DNetherlands
 
+4. Remove directory 3d.utrecht.nl\3DNetherlands\Assets\3DAmsterdam
 
+5. Remove directory 3d.utrecht.nl\3DNetherlands\Assets\Netherlands3D
+
+6. Add symbolic links as shown below, make sure the drive supports symbolic links. For Windows this only works on NTFS volumes
+
+   (to create the symbolic links you need to open a command prompt and run it as Administrator)
+```
+cd \3d.utrecht.nl\3DNetherlands\Assets
+mklink /d 3DAmsterdam \3DAmsterdam.fork\3DAmsterdam\Assets\3DAmsteram
+mklink /d Netherlands3D \3DAmsterdam.fork\3DAmsterdam\Assets\Netherlands3D
+```
+
+This completes the setup of the file structure. 
+The Webgl directory Fullscreen3DAmsterdam can be copied and made custom
 
 ## Unity Input System
 
@@ -129,3 +142,7 @@ Note, the generation these assets can take some time on your computer.
 
 
 
+
+```
+
+```
