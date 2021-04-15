@@ -4,8 +4,6 @@
 
 The code of this project is forked from 3DAmsterdam https://github.com/Amsterdam/3DAmsterdam
 
-This code is licensed under the Creative Common Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0) https://creativecommons.org/licenses/by-nd/4.0/
-
 The main goals are:
 - providing information about the city;
 - making communication and participation more accessible through visuals;
