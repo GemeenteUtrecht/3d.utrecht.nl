@@ -4,7 +4,6 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
-Packages/packages-lock.json
 
 # Visual Studio cache directory
 .vs/
@@ -40,6 +39,7 @@ sysinfo.txt
 
 Scene.json
 3DAmsterdam/Terrain/
-3DNetherlands/Assets/3DAmsterdam
-3DNetherlands/Assets/Netherlands3D
+3DNetherlands/Assets/3DAmsterdam*
+3DNetherlands/Assets/Netherlands3D*
+
 3DNetherlands/.vsconfig
