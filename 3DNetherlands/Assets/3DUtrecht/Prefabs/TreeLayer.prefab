@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2142115497793282634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2142115497793282637}
+  - component: {fileID: 2142115497793282636}
+  m_Layer: 0
+  m_Name: TreeLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2142115497793282637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142115497793282634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2142115497793282636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142115497793282634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b68d6a19499294883263a7cc620eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isenabled: 1
+  tileSize: 1000
+  layerPriority: 0
+  Datasets:
+  - Description: 
+    lod: 0
+    path: 
+    maximumDistance: 3000
+    maximumDistanceSquared: 0
+    enabled: 0
+  pauseLoading: 0
+  _material: {fileID: 2100000, guid: fe330b24b2a46b54f9f209bb9222af32, type: 2}
+  _offset: {x: 500, y: -43, z: 500}
+  _scale: 1
+  _replaceString: trees_rd/trees_{x}-{y}-lod1
