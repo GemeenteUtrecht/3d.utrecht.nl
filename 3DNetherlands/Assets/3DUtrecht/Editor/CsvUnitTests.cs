@@ -60,6 +60,18 @@ public class CsvUnitTests
         Assert.AreEqual(@"Vanaf 2019. We gaan de A.J. Ernststraat tussen Buitenveldertselaan en Van der Boechorststraat opnieuw inrichten vanwege bouw internationale school.", lines[0][11]);        
     }
 
+    [Test]
+    public void TestCsvParseFileUtrecht()
+    {
+        string csv = File.ReadAllText(@"F:\Data\Projecten CSV\gu_programma_ruimtelijke_ontwikkeling_20200615_20200630.csv");
+
+        var lines = CsvParser.ReadLines(csv, 1);
+
+        //Assert.AreEqual(199, lines.Count);
+        //Assert.AreEqual(12, lines[0].Length);
+        //Assert.AreEqual("52.3317937588", lines[0][0]);
+        //Assert.AreEqual(@"Vanaf 2019. We gaan de A.J. Ernststraat tussen Buitenveldertselaan en Van der Boechorststraat opnieuw inrichten vanwege bouw internationale school.", lines[0][11]);
+    }
 
 
 

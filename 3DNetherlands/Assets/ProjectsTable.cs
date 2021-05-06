@@ -39,7 +39,12 @@ public class ProjectPlanning
 
         foreach(var columns in lines)
         {
-            if (columns.Length < 3) throw new Exception("A project needs at least 3 columns ");
+            if (columns.Length < 3)
+            {
+                Debug.Log($"A project needs at least 3 columns: {columns[0]}");
+                continue;
+                throw new Exception("A project needs at least 3 columns ");
+            }
 
             var project = new ProjectPlanning();
                                    
@@ -50,14 +55,21 @@ public class ProjectPlanning
             project.yearend = mapping.yearend_index != null ? int.Parse(columns[mapping.yearend_index.Value]) : 0;
 
             if (mapping.longitude_index != null && mapping.latitude_index != null)
-            {                
-                var lon_index = mapping.longitude_index.Value;
-                var lat_index = mapping.latitude_index.Value;
-                var lon = double.Parse(columns[lon_index]);
-                var lat = double.Parse(columns[lat_index]);
-                var rd = ConvertCoordinates.CoordConvert.WGS84toRD(lon, lat);
-                project.x = rd.x;
-                project.y = rd.y;
+            {
+                try
+                {
+                    var lon_index = mapping.longitude_index.Value;
+                    var lat_index = mapping.latitude_index.Value;
+                    var lon = double.Parse(columns[lon_index]);
+                    var lat = double.Parse(columns[lat_index]);
+                    var rd = ConvertCoordinates.CoordConvert.WGS84toRD(lon, lat);
+                    project.x = rd.x;
+                    project.y = rd.y;
+                }
+                catch
+                {
+                    Debug.Log("Error parsing the x/y coordinates");
+                }
             }
             else
             {

@@ -59,7 +59,7 @@ public class TreeLayer : Layer
         var x = tileChange.X;
         var y = tileChange.Y;
 
-        var name = _replaceString.Replace("{x}", x.ToString()).Replace("{y}", y.ToString());
+        var name = _replaceString.ReplaceXY(x, y);
 
         if (_tiles.ContainsKey(name) == false)
         {

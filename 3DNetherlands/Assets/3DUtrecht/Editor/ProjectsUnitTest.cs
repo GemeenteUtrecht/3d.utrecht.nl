@@ -189,4 +189,29 @@ Overspanning viaduct Laarderweg; 80000; 350000; 3/9/2021; 30/12/2021; projects /
 
     }
 
+    [Test]
+    public void LoadAndParseCsvFileUtrecht()
+    {
+        string csv = File.ReadAllText(@"F:\Data\Projecten CSV\gu_programma_ruimtelijke_ontwikkeling_20200615_20200630.csv");
+
+        var mapping = new ProjectPlanningMapping()
+        {
+            //title_index = 2,
+            startAtRow = 1,
+            summary_index = 4,
+            longitude_index = 11,
+            latitude_index = 12
+        };
+        var projects = ProjectPlanning.LoadCsv(csv, mapping);
+
+        //Assert.AreEqual(199, projects.Count);
+        //Assert.AreEqual(119397.34375, projects[0].x);
+        //Assert.AreEqual(482779.5, projects[0].y);
+
+        //Assert.AreEqual("Vanaf 2019. We gaan de A.J. Ernststraat tussen Buitenveldertselaan en Van der Boechorststraat opnieuw inrichten vanwege bouw internationale school.", projects[0].summary);
+
+        //Assert.AreEqual("Project 'Herziening rotonde 231'", projects[0].description);
+
+    }
+
 }
