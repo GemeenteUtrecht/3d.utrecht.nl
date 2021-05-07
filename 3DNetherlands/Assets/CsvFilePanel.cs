@@ -146,11 +146,16 @@ public class CsvFilePanel : MonoBehaviour
 
         PropertiesPanel.Instance.SetDynamicFieldsTargetContainer(GeneratedFieldsContainer);
 
-        PropertiesPanel.Instance.AddInputText();
+        //PropertiesPanel.Instance.AddInputText();
 
 
         StartCoroutine(GetCsvFromWebserver($"csvfiles/{csvfile}"));
     }
 
+
+        //public void AddInputText()
+        //{
+        //    Instantiate(InputTextPrefab, targetFieldsContainer); 
+        //}
 
 }
