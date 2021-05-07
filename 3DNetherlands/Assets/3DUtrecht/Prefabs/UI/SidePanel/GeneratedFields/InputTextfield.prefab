@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0007019043, y: 0.001159668}
-  m_SizeDelta: {x: 373.92, y: 30}
+  m_SizeDelta: {x: 373.92, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7723127362949382366
 CanvasRenderer:
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 0
+  m_LineType: 1
   m_HideMobileInput: 0
   m_CharacterValidation: 0
   m_CharacterLimit: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
@@ -296,7 +296,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Csv file locationEnter text...
+  m_Text: Csv file location...
 --- !u!1 &8204464804396968670
 GameObject:
   m_ObjectHideFlags: 0

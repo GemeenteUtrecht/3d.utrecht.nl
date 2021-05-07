@@ -22,7 +22,13 @@ public class CsvFilePanel : MonoBehaviour
     public int titleIndex;
     public int summaryIndex;
 
-    private Dictionary<string,bool> selectedColumnsToDisplay = new System.Collections.Generic.Dictionary<string,bool>();    
+    private Dictionary<string,bool> selectedColumnsToDisplay = new System.Collections.Generic.Dictionary<string,bool>();
+
+
+    InputField inputfield;
+    List<ProjectPlanning> projectPlanningList;
+    string csv;
+
 
     IEnumerator GetCsvFromWebserver(string filename)
     {
@@ -40,7 +46,7 @@ public class CsvFilePanel : MonoBehaviour
             }
             else
             {
-                var csv = www.downloadHandler.text;
+                csv = www.downloadHandler.text;
                 csvdata = CsvParser.ReadLines(csv, 0);
                 columns = csvdata[0];
                 
@@ -71,38 +77,61 @@ public class CsvFilePanel : MonoBehaviour
 
                 PropertiesPanel.Instance.AddActionButtonBig("Toon data", (action) =>
                 {
-                    Debug.Log("Load the csv data in the world");
+                    MapAndShow();
+                    //Debug.Log("Load the csv data in the world");
                 });
 
 
-                var mapping = new ProjectPlanningMapping()
-                {
-                    startAtRow = 1,
-                    summary_index = summaryIndex,
-                    longitude_index = longIndex,
-                    latitude_index = latIndex
-                };
-                var projects = ProjectPlanning.LoadCsv(csv, mapping);
 
-                int count = 0;
-                foreach(var project in projects)
-                {
-                    count++;
-                    var search = Instantiate(marker);
-                    var billboard = search.GetComponent<Billboard>();                    
-                    billboard.Index = count;
-                    billboard.ClickAction = (action =>
-                    {
-                        Show(action);
-                    });
 
-                    var pos = ConvertCoordinates.CoordConvert.RDtoUnity(new Vector3((float)project.x, (float)project.y, 7));
 
-                    search.transform.position = pos;                 
-                }
 
 
             }
+        }
+    }
+
+
+    void MapAndShow()
+    {
+        var mapping = new ProjectPlanningMapping()
+        {
+            startAtRow = 1,
+            summary_index = summaryIndex,
+            longitude_index = longIndex,
+            latitude_index = latIndex
+        };
+
+        projectPlanningList = ProjectPlanning.LoadCsv(csv, mapping);
+
+        ShowAll();
+
+        PropertiesPanel.Instance.ClearGeneratedFields();
+
+        PropertiesPanel.Instance.AddLabel("Csv opgeslagen");
+
+        //show saved csv from localstorage
+
+    }
+
+
+    void ShowAll()
+    {
+        int count = 0;
+        foreach (var project in projectPlanningList)
+        {
+            count++;
+            var search = Instantiate(marker);
+            var billboard = search.GetComponent<Billboard>();
+            billboard.Index = count;
+            billboard.ClickAction = (action =>
+            {
+                Show(action);
+            });
+
+            var pos = ConvertCoordinates.CoordConvert.RDtoUnity(new Vector3((float)project.x, (float)project.y, 7));
+
+            search.transform.position = pos;
         }
     }
 
@@ -145,17 +174,16 @@ public class CsvFilePanel : MonoBehaviour
         isInited = true;
 
         PropertiesPanel.Instance.SetDynamicFieldsTargetContainer(GeneratedFieldsContainer);
+        
+        inputfield = PropertiesPanel.Instance.AddInputText();
 
-        //PropertiesPanel.Instance.AddInputText();
+        PropertiesPanel.Instance.AddSpacer(20);
 
-
-        StartCoroutine(GetCsvFromWebserver($"csvfiles/{csvfile}"));
+        PropertiesPanel.Instance.AddActionButtonBig("Laad csv bestand", (action) => {
+            var csvurl = inputfield.text;
+            StartCoroutine(GetCsvFromWebserver($"csvfiles/{csvfile}"));
+        });
+        
     }
-
-
-        //public void AddInputText()
-        //{
-        //    Instantiate(InputTextPrefab, targetFieldsContainer); 
-        //}
 
 }
