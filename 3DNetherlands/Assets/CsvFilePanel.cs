@@ -180,7 +180,12 @@ public class CsvFilePanel : MonoBehaviour
         PropertiesPanel.Instance.AddSpacer(20);
 
         PropertiesPanel.Instance.AddActionButtonBig("Laad csv bestand", (action) => {
+
             var csvurl = inputfield.text;
+
+            if (string.IsNullOrEmpty(csvurl)) return;
+            
+
             StartCoroutine(GetCsvFromWebserver($"csvfiles/{csvfile}"));
         });
         
