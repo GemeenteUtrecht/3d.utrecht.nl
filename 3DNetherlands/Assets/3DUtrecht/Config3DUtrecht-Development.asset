@@ -29,6 +29,7 @@ MonoBehaviour:
   sharingViewUrl: https://3d.amsterdam.nl/web/app/index.html?view=
   LocationSuggestionUrl: https://geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?q={SEARCHTERM}%20and%20Utrecht%20&rows=5
   LookupUrl: https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id={ID}
+  sewerageApiType: 1
   sewerPipesWfsUrl: https://api.data.amsterdam.nl/v1/wfs/rioolnetwerk/?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=geojson&srsname=epsg:4258&typeName=rioolleidingen&bbox=
   sewerManholesWfsUrl: https://api.data.amsterdam.nl/v1/wfs/rioolnetwerk/?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=geojson&srsname=epsg:4258&typeName=rioolknopen&bbox=
   buildingUrl: https://api.data.amsterdam.nl/bag/v1.1/pand/
