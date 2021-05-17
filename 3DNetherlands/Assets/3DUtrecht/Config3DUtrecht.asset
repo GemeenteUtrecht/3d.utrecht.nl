@@ -15,7 +15,7 @@ MonoBehaviour:
   RelativeCenterRD:
     x: 136776
     y: 455879
-  zeroGroundLevelY: 43
+  zeroGroundLevelY: 0
   EnableMinimap: 0
   minimapServiceUrl: https://t1.data.amsterdam.nl/topo_rd/{zoom}/{x}/{y}.png
   MinimapTileNumberingType: 0
@@ -27,11 +27,11 @@ MonoBehaviour:
   sharingBaseURL: https://3d.amsterdam.nl/
   sharingSceneSubdirectory: customScene.php?id=
   sharingViewUrl: https://3d.amsterdam.nl/web/app/index.html?view=
-  downloadsPage: https://3d.amsterdam.nl/web/downloads/index.html
   LocationSuggestionUrl: https://geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?q={SEARCHTERM}%20and%20Utrecht%20&rows=5
   LookupUrl: https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id={ID}
-  sewerPipesWfsUrl: https://api.data.amsterdam.nl/v1/wfs/rioolnetwerk/?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=geojson&srsname=epsg:4258&typeName=rioolleidingen&bbox=
-  sewerManholesWfsUrl: https://api.data.amsterdam.nl/v1/wfs/rioolnetwerk/?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=geojson&srsname=epsg:4258&typeName=rioolknopen&bbox=
+  sewerageApiType: 1
+  sewerPipesWfsUrl: https://geodata.nationaalgeoregister.nl/rioned/gwsw/wfs/v1_0?SERVICE=WFS&language=eng&SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=gwsw:beheer_leiding&SRSNAME=urn:ogc:def:crs:EPSG::28992&outputFormat=application/json&BBOX=
+  sewerManholesWfsUrl: https://geodata.nationaalgeoregister.nl/rioned/gwsw/wfs/v1_0?SERVICE=WFS&language=eng&SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=gwsw:beheer_put&SRSNAME=urn:ogc:def:crs:EPSG::28992&outputFormat=application/json&BBOX=
   buildingUrl: https://api.data.amsterdam.nl/bag/v1.1/pand/
   numberIndicatorURL: https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?pand=
   numberIndicatorInstanceURL: https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/
