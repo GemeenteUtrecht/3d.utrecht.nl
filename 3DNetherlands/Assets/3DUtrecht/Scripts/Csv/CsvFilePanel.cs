@@ -1,4 +1,5 @@
-﻿using Netherlands3D;
+﻿using ConvertCoordinates;
+using Netherlands3D;
 using Netherlands3D.Interface.Search;
 using Netherlands3D.Interface.SidePanel;
 using System;
@@ -10,34 +11,19 @@ using UnityEngine.UI;
 
 public class CsvFilePanel : MonoBehaviour
 {
-    private bool isInited;
-    private List<string[]> csvdata;
-    private string[] columns;
     public GameObject marker;
     public Transform GeneratedFieldsContainer;
 
-    public string csvfile;
-    public int longIndex;
-    public int latIndex;
-    public int titleIndex;
-    public int summaryIndex;
-
+    private bool isInited;
     private Dictionary<string,bool> selectedColumnsToDisplay = new System.Collections.Generic.Dictionary<string,bool>();
+    private InputField inputfield;
+    private string csv;
+    private CsvGeoLocation csvGeoLocation;
 
 
-    InputField inputfield;
-    List<ProjectPlanning> projectPlanningList;
-    string csv;
-
-
-    IEnumerator GetCsvFromWebserver(string filename)
-    {
-        //Uri baseUri = new Uri(Config.activeConfiguration.webserverRootPath);
-
-        Uri baseUri = new Uri(@"http://3d.utrecht.nl/");
-        var uri = new Uri(baseUri, filename);
-
-        using (UnityWebRequest www = UnityWebRequest.Get(uri))
+    IEnumerator GetCsvFromWebserver(string url)
+    {        
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
             yield return www.SendWebRequest();
             if (www.isNetworkError || www.isHttpError)
@@ -47,46 +33,47 @@ public class CsvFilePanel : MonoBehaviour
             else
             {
                 csv = www.downloadHandler.text;
-                csvdata = CsvParser.ReadLines(csv, 0);
-                columns = csvdata[0];
-                
-                PropertiesPanel.Instance.AddLabel("Kolom X-coordinaat");
-                PropertiesPanel.Instance.AddActionDropdown(columns, (action) =>
-                {
-                    Debug.Log($"xcoordinate: {action}");
-                }, "");
+                csvGeoLocation = new CsvGeoLocation(csv);
 
-                PropertiesPanel.Instance.AddLabel("Kolom y-coordinaat");
-                PropertiesPanel.Instance.AddActionDropdown(csvdata[0], (action) =>
+
+                PropertiesPanel.Instance.AddLabel("X-coördinaat (gedetecteerd)");
+                PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.CoordinateColumns, (action) =>
                 {
                     Debug.Log($"xcoordinate: {action}");
+                }, csvGeoLocation.XColumnName);
+
+                PropertiesPanel.Instance.AddLabel("Y-coördinaat (gedetecteerd)");
+                PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.CoordinateColumns, (action) =>
+                {
+                    Debug.Log($"xcoordinate: {action}");
+                }, csvGeoLocation.YColumnName);
+
+                PropertiesPanel.Instance.AddLabel("Label");
+                PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.ColumnsExceptCoordinates, (action) =>
+                {
+                    Debug.Log($"label: {action}");
+                    csvGeoLocation.LabelColumnName = action;
+                    csvGeoLocation.SetlabelIndex(action);
+
                 }, "");
 
                 PropertiesPanel.Instance.AddSpacer(10);
                 PropertiesPanel.Instance.AddLabel("Welke informatie wilt u zichtbaar maken als er op een label geklikt wordt?");
                 PropertiesPanel.Instance.AddSpacer(10);
 
-                foreach(var column in columns)
-                {                    
+                foreach (var column in csvGeoLocation.Columns)
+                {
                     selectedColumnsToDisplay.Add(column, true);
                     PropertiesPanel.Instance.AddActionCheckbox(column, true, (action) =>
                     {
-                        selectedColumnsToDisplay[column] = action;                        
+                        selectedColumnsToDisplay[column] = action;
                     });
                 }
 
                 PropertiesPanel.Instance.AddActionButtonBig("Toon data", (action) =>
                 {
-                    MapAndShow();
-                    //Debug.Log("Load the csv data in the world");
+                    MapAndShow();                    
                 });
-
-
-
-
-
-
-
             }
         }
     }
@@ -94,16 +81,6 @@ public class CsvFilePanel : MonoBehaviour
 
     void MapAndShow()
     {
-        var mapping = new ProjectPlanningMapping()
-        {
-            startAtRow = 1,
-            summary_index = summaryIndex,
-            longitude_index = longIndex,
-            latitude_index = latIndex
-        };
-
-        projectPlanningList = ProjectPlanning.LoadCsv(csv, mapping);
-
         ShowAll();
 
         PropertiesPanel.Instance.ClearGeneratedFields();
@@ -111,25 +88,44 @@ public class CsvFilePanel : MonoBehaviour
         PropertiesPanel.Instance.AddLabel("Csv opgeslagen");
 
         //show saved csv from localstorage
-
     }
 
 
     void ShowAll()
     {
         int count = 0;
-        foreach (var project in projectPlanningList)
+
+        var firstrow = csvGeoLocation.Rows[0];
+        double firstrow_x = double.Parse(firstrow[csvGeoLocation.XColumnIndex]);
+        bool isRd = csvGeoLocation.IsRd(firstrow_x);
+
+        foreach (var row in csvGeoLocation.Rows)
         {
             count++;
             var search = Instantiate(marker);
             var billboard = search.GetComponent<Billboard>();
+            var textmesh = search.GetComponentInChildren<TextMesh>();
+            textmesh.text = row[csvGeoLocation.LabelColumnIndex];
+
             billboard.Index = count;
             billboard.ClickAction = (action =>
             {
                 Show(action);
             });
 
-            var pos = ConvertCoordinates.CoordConvert.RDtoUnity(new Vector3((float)project.x, (float)project.y, 7));
+            double x = double.Parse(row[csvGeoLocation.XColumnIndex]);
+            double y = double.Parse(row[csvGeoLocation.YColumnIndex]);
+
+            Vector3 pos;
+
+            if (isRd)
+            {
+                pos = ConvertCoordinates.CoordConvert.RDtoUnity(new Vector3RD(x, y, 7));
+            }
+            else
+            {
+                pos = ConvertCoordinates.CoordConvert.WGS84toUnity(new Vector3WGS(y, x, 7));
+            }
 
             search.transform.position = pos;
         }
@@ -137,14 +133,12 @@ public class CsvFilePanel : MonoBehaviour
 
     void Show(int index)
     {
-        Debug.Log($"csv file click index: {index}" );
-
         PropertiesPanel.Instance.ClearGeneratedFields();
-        var row = csvdata[index];
-        
-        for(int i = 0; i< row.Length; i++)
+        var row = csvGeoLocation.Rows[index];
+
+        for (int i = 0; i < row.Length; i++)
         {
-            var column = columns[i];
+            var column = csvGeoLocation.Columns[i];
             var text = row[i];
 
             if (selectedColumnsToDisplay[column])
@@ -157,14 +151,10 @@ public class CsvFilePanel : MonoBehaviour
                 {
                     PropertiesPanel.Instance.AddTextfield(text);
                 }
-                
+
                 PropertiesPanel.Instance.AddSpacer(10);
             }
         }
-
-
-
-
     }
     
 
@@ -174,20 +164,18 @@ public class CsvFilePanel : MonoBehaviour
         isInited = true;
 
         PropertiesPanel.Instance.SetDynamicFieldsTargetContainer(GeneratedFieldsContainer);
-        
+
         inputfield = PropertiesPanel.Instance.AddInputText();
 
-        PropertiesPanel.Instance.AddSpacer(20);
-
-        PropertiesPanel.Instance.AddActionButtonBig("Laad csv bestand", (action) => {
-
-            var csvurl = inputfield.text;
+        PropertiesPanel.Instance.AddActionButtonBig("Laad csv bestand", (action) =>
+        {
+            var csvurl = inputfield.text.Trim();
 
             if (string.IsNullOrEmpty(csvurl)) return;
-            
-
-            StartCoroutine(GetCsvFromWebserver($"csvfiles/{csvfile}"));
+           
+            StartCoroutine(GetCsvFromWebserver(csvurl));
         });
+
         
     }
 
