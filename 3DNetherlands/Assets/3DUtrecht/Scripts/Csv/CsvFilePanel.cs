@@ -5,6 +5,7 @@ using Netherlands3D.Interface.SidePanel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -35,18 +36,19 @@ public class CsvFilePanel : MonoBehaviour
                 csv = www.downloadHandler.text;
                 csvGeoLocation = new CsvGeoLocation(csv);
 
+                if (csvGeoLocation.CoordinateColumns.Length == 0) yield break; 
 
-                PropertiesPanel.Instance.AddLabel("X-coördinaat (gedetecteerd)");
-                PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.CoordinateColumns, (action) =>
-                {
-                    Debug.Log($"xcoordinate: {action}");
-                }, csvGeoLocation.XColumnName);
+                //PropertiesPanel.Instance.AddLabel("X-coördinaat (gedetecteerd)");
+                //PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.CoordinateColumns, (action) =>
+                //{
+                //    Debug.Log($"xcoordinate: {action}");
+                //}, csvGeoLocation.XColumnName);
 
-                PropertiesPanel.Instance.AddLabel("Y-coördinaat (gedetecteerd)");
-                PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.CoordinateColumns, (action) =>
-                {
-                    Debug.Log($"xcoordinate: {action}");
-                }, csvGeoLocation.YColumnName);
+                //PropertiesPanel.Instance.AddLabel("Y-coördinaat (gedetecteerd)");
+                //PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.CoordinateColumns, (action) =>
+                //{
+                //    Debug.Log($"xcoordinate: {action}");
+                //}, csvGeoLocation.YColumnName);
 
                 PropertiesPanel.Instance.AddLabel("Label");
                 PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.ColumnsExceptCoordinates, (action) =>
@@ -63,6 +65,8 @@ public class CsvFilePanel : MonoBehaviour
 
                 foreach (var column in csvGeoLocation.Columns)
                 {
+                    if (csvGeoLocation.CoordinateColumns.Contains(column)) continue;
+
                     selectedColumnsToDisplay.Add(column, true);
                     PropertiesPanel.Instance.AddActionCheckbox(column, true, (action) =>
                     {
@@ -91,6 +95,8 @@ public class CsvFilePanel : MonoBehaviour
     }
 
 
+    List<TextMesh> labels = new List<TextMesh>();
+
     void ShowAll()
     {
         int count = 0;
@@ -106,6 +112,8 @@ public class CsvFilePanel : MonoBehaviour
             var billboard = search.GetComponent<Billboard>();
             var textmesh = search.GetComponentInChildren<TextMesh>();
             textmesh.text = row[csvGeoLocation.LabelColumnIndex];
+
+            labels.Add(textmesh);
 
             billboard.Index = count;
             billboard.ClickAction = (action =>
@@ -131,9 +139,31 @@ public class CsvFilePanel : MonoBehaviour
         }
     }
 
+    private void UpdateLabels()
+    {
+        for (int i = 0; i < csvGeoLocation.Rows.Count; i++) 
+        {
+            var row = csvGeoLocation.Rows[i];
+            labels[i].text = row[csvGeoLocation.LabelColumnIndex];
+        }
+     }
+
     void Show(int index)
     {
         PropertiesPanel.Instance.ClearGeneratedFields();
+
+        PropertiesPanel.Instance.AddLabel("Label");
+        PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.ColumnsExceptCoordinates, (action) =>
+        {
+            Debug.Log($"label: {action}");
+            csvGeoLocation.LabelColumnName = action;
+            csvGeoLocation.SetlabelIndex(action);
+
+            UpdateLabels();
+
+        }, csvGeoLocation.LabelColumnName);
+
+
         var row = csvGeoLocation.Rows[index];
 
         for (int i = 0; i < row.Length; i++)
@@ -141,18 +171,23 @@ public class CsvFilePanel : MonoBehaviour
             var column = csvGeoLocation.Columns[i];
             var text = row[i];
 
-            if (selectedColumnsToDisplay[column])
+            if (selectedColumnsToDisplay.ContainsKey(column) &&  selectedColumnsToDisplay[column])
             {
+                PropertiesPanel.Instance.AddLabel(column);
+
                 if (text.StartsWith("http"))
                 {
                     PropertiesPanel.Instance.AddLink(text, text);
                 }
                 else
                 {
-                    PropertiesPanel.Instance.AddTextfield(text);
+                    PropertiesPanel.Instance.AddActionButtonText(text, (action) =>
+                    {
+                        Debug.Log("Filter");
+                    });
                 }
 
-                PropertiesPanel.Instance.AddSpacer(10);
+                //PropertiesPanel.Instance.AddSpacer(5);
             }
         }
     }
