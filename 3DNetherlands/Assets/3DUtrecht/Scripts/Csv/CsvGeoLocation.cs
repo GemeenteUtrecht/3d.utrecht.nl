@@ -226,30 +226,9 @@ public class CsvGeoLocation
                 num >= 3.29804 && num <= 7.57893;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    internal string[] GetFiltersByColumn()
+    {
+        return Rows.Select(o => o[LabelColumnIndex]).Where( o=> string.IsNullOrEmpty(o) == false ).Distinct().Prepend("Toon alles").ToArray();
+    }
 }
 

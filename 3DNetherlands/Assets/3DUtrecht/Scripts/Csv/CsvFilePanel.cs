@@ -2,100 +2,150 @@
 using Netherlands3D;
 using Netherlands3D.Interface.Search;
 using Netherlands3D.Interface.SidePanel;
+using Netherlands3D.JavascriptConnection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class CsvFilePanel : MonoBehaviour
 {
-    public GameObject marker;
-    public Transform GeneratedFieldsContainer;
+    [SerializeField]
+    private GameObject marker;
 
-    private bool isInited;
+    [SerializeField]
+    private Transform GeneratedFieldsContainer;
+
+    [SerializeField]
+    private GameObject AddButton;
+
+    [SerializeField]
+    private GameObject LabelPrefab;
+
+    [SerializeField]
+    private GameObject TextfieldPrefab;
+
+
     private Dictionary<string,bool> selectedColumnsToDisplay = new System.Collections.Generic.Dictionary<string,bool>();
-    private InputField inputfield;
-    private string csv;
+
     private CsvGeoLocation csvGeoLocation;
 
+    private GameObject LocationMarkersParent;
 
-    IEnumerator GetCsvFromWebserver(string url)
-    {        
-        using (UnityWebRequest www = UnityWebRequest.Get(url))
+    public void ParseCsv(string csv)
+    {
+        if (LocationMarkersParent == null)
         {
-            yield return www.SendWebRequest();
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                csv = www.downloadHandler.text;
-                csvGeoLocation = new CsvGeoLocation(csv);
-
-                if (csvGeoLocation.CoordinateColumns.Length == 0) yield break; 
-
-                //PropertiesPanel.Instance.AddLabel("X-coördinaat (gedetecteerd)");
-                //PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.CoordinateColumns, (action) =>
-                //{
-                //    Debug.Log($"xcoordinate: {action}");
-                //}, csvGeoLocation.XColumnName);
-
-                //PropertiesPanel.Instance.AddLabel("Y-coördinaat (gedetecteerd)");
-                //PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.CoordinateColumns, (action) =>
-                //{
-                //    Debug.Log($"xcoordinate: {action}");
-                //}, csvGeoLocation.YColumnName);
-
-                PropertiesPanel.Instance.AddLabel("Label");
-                PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.ColumnsExceptCoordinates, (action) =>
-                {
-                    Debug.Log($"label: {action}");
-                    csvGeoLocation.LabelColumnName = action;
-                    csvGeoLocation.SetlabelIndex(action);
-
-                }, "");
-
-                PropertiesPanel.Instance.AddSpacer(10);
-                PropertiesPanel.Instance.AddLabel("Welke informatie wilt u zichtbaar maken als er op een label geklikt wordt?");
-                PropertiesPanel.Instance.AddSpacer(10);
-
-                foreach (var column in csvGeoLocation.Columns)
-                {
-                    if (csvGeoLocation.CoordinateColumns.Contains(column)) continue;
-
-                    selectedColumnsToDisplay.Add(column, true);
-                    PropertiesPanel.Instance.AddActionCheckbox(column, true, (action) =>
-                    {
-                        selectedColumnsToDisplay[column] = action;
-                    });
-                }
-
-                PropertiesPanel.Instance.AddActionButtonBig("Toon data", (action) =>
-                {
-                    MapAndShow();                    
-                });
-            }
+            LocationMarkersParent = new GameObject("LocationMarkers");
         }
+        else
+        {
+            ClearLocationMarkers();
+            Reset();
+        }
+
+        PropertiesPanel.Instance.SetDynamicFieldsTargetContainer(GeneratedFieldsContainer);
+
+        ClearGeneratedFields();
+
+        //Debug.Log("ParseCsv");
+
+        csvGeoLocation = new CsvGeoLocation(csv);
+
+        if (csvGeoLocation.CoordinateColumns.Length == 0) return; //TODO add error info to the user
+               
+        PropertiesPanel.Instance.AddLabel("Label");
+        PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.ColumnsExceptCoordinates, (action) =>
+        {
+            //Debug.Log($"label: {action}");
+            csvGeoLocation.LabelColumnName = action;
+            csvGeoLocation.SetlabelIndex(action);
+
+        }, "");
+
+        PropertiesPanel.Instance.AddSpacer(10);
+        PropertiesPanel.Instance.AddLabel("Welke informatie wilt u zichtbaar maken als er op een label geklikt wordt?");
+        PropertiesPanel.Instance.AddSpacer(10);
+
+        foreach (var column in csvGeoLocation.Columns)
+        {
+            if (csvGeoLocation.CoordinateColumns.Contains(column)) continue;
+
+            selectedColumnsToDisplay.Add(column, true);
+            PropertiesPanel.Instance.AddActionCheckbox(column, true, (action) =>
+            {
+                selectedColumnsToDisplay[column] = action;
+            });
+        }
+
+        PropertiesPanel.Instance.AddActionButtonBig("Toon data", (action) =>
+        {
+            MapAndShow();               
+        });
+
     }
 
+    void AddLabel(string text, Color color, FontStyle style)
+    {
+        var gam = Instantiate(LabelPrefab, GeneratedFieldsContainer);
+        var textComponent = gam.GetComponent<Text>();
+        textComponent.text = text;
+        textComponent.color = color;
+        textComponent.fontStyle = style;
+    }
+
+    void AddTextfield(string text, Color color, FontStyle style)
+    {
+        var gam = Instantiate(TextfieldPrefab, GeneratedFieldsContainer);
+        var textComponent = gam.GetComponent<Text>();
+        textComponent.text = text;
+        textComponent.color = color;
+        textComponent.fontStyle = style;
+    }
 
     void MapAndShow()
     {
         ShowAll();
 
-        PropertiesPanel.Instance.ClearGeneratedFields();
+        //PropertiesPanel.Instance.ClearGeneratedFields();
+        ClearGeneratedFields();
 
-        PropertiesPanel.Instance.AddLabel("Csv opgeslagen");
+        PropertiesPanel.Instance.AddLabel($"CSV file geladen met {csvGeoLocation.Rows.Count} rijen");
+        PropertiesPanel.Instance.AddLabel("Klik op een icoon voor details");
 
         //show saved csv from localstorage
     }
 
+    private void Reset()
+    {
+        selectedColumnsToDisplay.Clear();
+        labels.Clear();
+    }
 
-    List<TextMesh> labels = new List<TextMesh>();
+    public void ClearLocationMarkers()
+    {
+        foreach (Transform marker in LocationMarkersParent.transform)
+        {
+            Destroy(marker.gameObject);
+        }
+    }
+
+    public void ClearGeneratedFields()
+    {
+        foreach (Transform field in GeneratedFieldsContainer)
+        {
+            if (field.gameObject == AddButton) continue;
+
+            Destroy(field.gameObject);
+        }
+    }
+
+    private List<TextMesh> labels = new List<TextMesh>();
 
     void ShowAll()
     {
@@ -106,16 +156,18 @@ public class CsvFilePanel : MonoBehaviour
         bool isRd = csvGeoLocation.IsRd(firstrow_x);
 
         foreach (var row in csvGeoLocation.Rows)
-        {
+        {            
             count++;
-            var search = Instantiate(marker);
-            var billboard = search.GetComponent<Billboard>();
-            var textmesh = search.GetComponentInChildren<TextMesh>();
+            var locationMarker = Instantiate(marker, LocationMarkersParent.transform);
+
+            var billboard = locationMarker.GetComponent<Billboard>();
+            var textmesh = locationMarker.GetComponentInChildren<TextMesh>();
             textmesh.text = row[csvGeoLocation.LabelColumnIndex];
 
             labels.Add(textmesh);
 
             billboard.Index = count;
+            billboard.Row = row;
             billboard.ClickAction = (action =>
             {
                 Show(action);
@@ -135,7 +187,7 @@ public class CsvFilePanel : MonoBehaviour
                 pos = ConvertCoordinates.CoordConvert.WGS84toUnity(new Vector3WGS(y, x, 7));
             }
 
-            search.transform.position = pos;
+            locationMarker.transform.position = pos;
         }
     }
 
@@ -149,8 +201,8 @@ public class CsvFilePanel : MonoBehaviour
      }
 
     void Show(int index)
-    {
-        PropertiesPanel.Instance.ClearGeneratedFields();
+    {        
+        ClearGeneratedFields();
 
         PropertiesPanel.Instance.AddLabel("Label");
         PropertiesPanel.Instance.AddActionDropdown(csvGeoLocation.ColumnsExceptCoordinates, (action) =>
@@ -160,9 +212,28 @@ public class CsvFilePanel : MonoBehaviour
             csvGeoLocation.SetlabelIndex(action);
 
             UpdateLabels();
+            Show(index);//TODO improve this code
 
         }, csvGeoLocation.LabelColumnName);
 
+        PropertiesPanel.Instance.AddLabel("Filters");
+
+        string[] filters = csvGeoLocation.GetFiltersByColumn();        
+
+        PropertiesPanel.Instance.AddActionDropdown(filters, (action) =>
+        {
+            Debug.Log($"label: {action}");
+            foreach (Transform marker in LocationMarkersParent.transform)
+            {
+                var billboard = marker.GetComponent<Billboard>();
+
+                if(action == "Toon alles") billboard.Show();
+                else billboard.FilterOn(csvGeoLocation.LabelColumnIndex, action);
+            }
+
+        }, "");
+
+        PropertiesPanel.Instance.AddSpacer(20);
 
         var row = csvGeoLocation.Rows[index];
 
@@ -173,7 +244,7 @@ public class CsvFilePanel : MonoBehaviour
 
             if (selectedColumnsToDisplay.ContainsKey(column) &&  selectedColumnsToDisplay[column])
             {
-                PropertiesPanel.Instance.AddLabel(column);
+                AddLabel(column, new Color(0,0.2705f,0.6f,1), FontStyle.Bold);
 
                 if (text.StartsWith("http"))
                 {
@@ -181,37 +252,44 @@ public class CsvFilePanel : MonoBehaviour
                 }
                 else
                 {
-                    PropertiesPanel.Instance.AddActionButtonText(text, (action) =>
-                    {
-                        Debug.Log("Filter");
-                    });
+                    //PropertiesPanel.Instance.AddLabel(text);
+                    AddTextfield(text,Color.black, FontStyle.Italic);
                 }
 
-                //PropertiesPanel.Instance.AddSpacer(5);
+                PropertiesPanel.Instance.AddSeperatorLine();
+
+
             }
         }
     }
-    
 
-    private void OnEnable()
+
+    public void LoadCSVFromJavascript()
     {
-        if (isInited) return;
-        isInited = true;
-
-        PropertiesPanel.Instance.SetDynamicFieldsTargetContainer(GeneratedFieldsContainer);
-
-        inputfield = PropertiesPanel.Instance.AddInputText();
-
-        PropertiesPanel.Instance.AddActionButtonBig("Laad csv bestand", (action) =>
-        {
-            var csvurl = inputfield.text.Trim();
-
-            if (string.IsNullOrEmpty(csvurl)) return;
-           
-            StartCoroutine(GetCsvFromWebserver(csvurl));
-        });
-
-        
+        Debug.Log("LoadCSVFromJavascript");
+        var csv = JavascriptMethodCaller.FetchOBJDataAsString();
+        Debug.Log($"csv:{csv}");
+        ParseCsv(csv);
     }
+
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// For Editor testing only.
+    /// This method loads a csv file.
+    /// </summary>
+    [ContextMenu("Open csv file selection dialog")]
+    public void LoadCsvViaEditor()
+    {
+        if (!Application.isPlaying) return;
+
+        string path = EditorUtility.OpenFilePanel("Selecteer .csv", "", "csv");
+        if (path.Length != 0)
+        {
+            var csv = File.ReadAllText(path);
+            ParseCsv(csv);
+        }
+    }
+#endif
 
 }
