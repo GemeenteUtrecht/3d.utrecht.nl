@@ -22,7 +22,7 @@ MonoBehaviour:
   minimapBottomLeftRD_X: -285401.9
   minimapBottomLeftRD_Y: 22598.08
   MinimapZoom0RDSize: 880803.8
-  webserverRootPath: http://3dutrecht.azureedge.net
+  webserverRootPath: https://3dutrecht.azureedge.net/
   buildingsMetaDataPath: http://3d.utrecht.nl/buildings/objectdata/
   sharingBaseURL: https://3d.amsterdam.nl/
   sharingSceneSubdirectory: customScene.php?id=
