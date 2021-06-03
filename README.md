@@ -53,7 +53,7 @@ The files structure of the project looks like this.
 
 To setup the file structure the following steps should be performed
 
-1. Fork https://github.com/Amsterdam/3DAmsterdam and clone to 3DAmsterdam.fork
+1. Fork https://github.com/GemeenteUtrecht/3DAmsterdam and clone to 3DAmsterdam.fork
 
 2. Clone code from https://github.com/GemeenteUtrecht/3d.utrecht.nl to 3d.utrecht.nl
 
