@@ -53,10 +53,13 @@ The files structure of the project looks like this.
 
 To setup the file structure the following steps should be performed
 
-1. If you want the latest update of the 3DAmsterdam project, you have to update the fork with the latest data from https://github.com/Amsterdam/3Damsterdam
+1. If you want the latest update of the 3DAmsterdam project, you have to update the fork with the latest data from https://github.com/Amsterdam/3Damsterdam 
+   To do this setup two origins in your git client. Name them Amsterdam and fork. 
+   Amsterdam points to https://github.com/Amsterdam/3Damsterdam Fork points to https://github.com/GemeenteUtrecht/3DAmsterdam
+   Every time you want to update your fork to the latest code, pull it from origin Amsterdam.
 
 2. Clone code from https://github.com/GemeenteUtrecht/3DAmsterdam to 3DAmsterdam.fork 
-    (this is a fork of https://github.com/Amsterdam/3Damsterdam)
+    
 
 3. Clone code from https://github.com/GemeenteUtrecht/3d.utrecht.nl to 3d.utrecht.nl
 
