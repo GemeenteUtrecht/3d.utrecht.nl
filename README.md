@@ -55,15 +55,9 @@ To setup the file structure the following steps should be performed
 
 1. Fork https://github.com/Amsterdam/3DAmsterdam and clone to 3DAmsterdam.fork
 
-2. Create directory 3d.utrecht.nl. This is also the location to place the README.MD file
+2. Clone code from https://github.com/GemeenteUtrecht/3d.utrecht.nl to 3d.utrecht.nl
 
-3. Copy the files from 3DAmsterdam.fork\3DAmsterdam to 3d.utrecht.nl\3DNetherlands
-
-4. Remove directory 3d.utrecht.nl\3DNetherlands\Assets\3DAmsterdam
-
-5. Remove directory 3d.utrecht.nl\3DNetherlands\Assets\Netherlands3D
-
-6. Add symbolic links as shown below, make sure the drive supports symbolic links. For Windows this only works on NTFS volumes
+3. Add symbolic links as shown below, make sure the drive supports symbolic links. For Windows this only works on NTFS volumes
 
    (to create the symbolic links you need to open a command prompt and run it as Administrator)
 ```
