@@ -53,11 +53,14 @@ The files structure of the project looks like this.
 
 To setup the file structure the following steps should be performed
 
-1. Clone code from https://github.com/GemeenteUtrecht/3DAmsterdam to 3DAmsterdam.fork (this is a fork of https://github.com/Amsterdam/3Damsterdam)
+1. If you want the latest update of the 3DAmsterdam project, you have to update the fork with the latest data from https://github.com/Amsterdam/3Damsterdam
 
-2. Clone code from https://github.com/GemeenteUtrecht/3d.utrecht.nl to 3d.utrecht.nl
+2. Clone code from https://github.com/GemeenteUtrecht/3DAmsterdam to 3DAmsterdam.fork 
+    (this is a fork of https://github.com/Amsterdam/3Damsterdam)
 
-3. Add symbolic links as shown below, make sure the drive supports symbolic links. For Windows this only works on NTFS volumes
+3. Clone code from https://github.com/GemeenteUtrecht/3d.utrecht.nl to 3d.utrecht.nl
+
+4. Add symbolic links as shown below, make sure the drive supports symbolic links. For Windows this only works on NTFS volumes
 
    (to create the symbolic links you need to open a command prompt and run it as Administrator)
 ```
