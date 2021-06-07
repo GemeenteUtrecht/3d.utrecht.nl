@@ -32,6 +32,7 @@ MonoBehaviour:
   sewerageApiType: 1
   sewerPipesWfsUrl: https://geodata.nationaalgeoregister.nl/rioned/gwsw/wfs/v1_0?SERVICE=WFS&language=eng&SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=gwsw:beheer_leiding&SRSNAME=urn:ogc:def:crs:EPSG::28992&outputFormat=application/json&BBOX=
   sewerManholesWfsUrl: https://geodata.nationaalgeoregister.nl/rioned/gwsw/wfs/v1_0?SERVICE=WFS&language=eng&SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=gwsw:beheer_put&SRSNAME=urn:ogc:def:crs:EPSG::28992&outputFormat=application/json&BBOX=
+  BagApiType: 1
   buildingUrl: https://bagviewer.kadaster.nl/lvbag/bag-viewer/api/bag/details?objectId=
   numberIndicatorURL: https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?pand=
   numberIndicatorInstanceURL: https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/
