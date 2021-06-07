@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/3DUtrecht/Scenes/3DUtrecht.unity
     guid: 88f657f3bdb5b3642901e5560ea36d50
