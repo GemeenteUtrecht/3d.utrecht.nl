@@ -37,7 +37,7 @@ MonoBehaviour:
   numberIndicatorURL: https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?pand=
   numberIndicatorInstanceURL: https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/
   monumentURL: https://api.data.amsterdam.nl/monumenten/monumenten/?betreft_pand=
-  moreBuildingInfoUrl: https://data.amsterdam.nl/data/bag/pand/id{bagid}/
+  moreBuildingInfoUrl: https://bagviewer.kadaster.nl/lvbag/bag-viewer/index.html#?geometry.x={x}&geometry.y={y}&zoomlevel=5&objectId={id}
   moreAddressInfoUrl: https://data.amsterdam.nl/data/bag/nummeraanduiding/id{bagid}/
   bagIdRequestServiceBoundingBoxUrl: https://map.data.amsterdam.nl/maps/bag?REQUEST=GetFeature&SERVICE=wfs&version=2.0.0&typeName=bag:pand&propertyName=bag:id&outputFormat=csv&bbox=
   bagIdRequestServicePolygonUrl: https://map.data.amsterdam.nl/maps/bag?REQUEST=GetFeature&SERVICE=wfs&version=2.0.0&typeName=bag:pand&propertyName=bag:id&outputFormat=csv&Filter=
