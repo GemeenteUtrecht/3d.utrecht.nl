@@ -74,7 +74,7 @@ public class TreeLayer : Layer
                 {
                     AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(uwr);
 
-                    // yield return new WaitUntil(() => pauseLoading == false);
+                     yield return new WaitUntil(() => pauseLoading == false);
 
                     var mesh = assetBundle.LoadAllAssets<Mesh>().First();
                     GameObject gam = new GameObject();
@@ -94,9 +94,6 @@ public class TreeLayer : Layer
         callback(tileChange);
     }
 
-    public override void OnDisableTiles(bool isenabled)
-    {        
-    }
 
     
 }
