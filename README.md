@@ -11,7 +11,7 @@ The main goals are:
 
 More and more information and data is embedded, allowing future features like running simulations, visualization of solar and wind studies and showing impact of spatial urban changes. It will improve public insight in decision making processes.
 
-## Unity 2019.4. (LTS)
+## Unity 2020.3.11f1 (LTS)
 The project is using the latest LTS (long-term support) release of Unity: 2019.4.
 We will stick to this version untill new engine feature updates are required for the sake of maximum stability.
 ## WebGL/Universal Render Pipeline
