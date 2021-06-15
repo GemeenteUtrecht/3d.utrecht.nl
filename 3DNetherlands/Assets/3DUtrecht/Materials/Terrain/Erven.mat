@@ -60,6 +60,18 @@ Material:
         m_Texture: {fileID: 2800000, guid: edda0ee214e064a40a4e33a2474fe72a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
@@ -92,6 +104,7 @@ Material:
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Tiling: {r: 10, g: 10, b: 0, a: 0}
     - _TilingDetail: {r: 0.1, g: 0.1, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!114 &656990703187192908
 MonoBehaviour:
   m_ObjectHideFlags: 11
