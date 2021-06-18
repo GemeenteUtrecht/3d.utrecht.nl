@@ -15,6 +15,12 @@ MonoBehaviour:
   RelativeCenterRD:
     x: 136776
     y: 455879
+  BottomLeftRD:
+    x: 0
+    y: 0
+  TopRightRD:
+    x: 0
+    y: 0
   zeroGroundLevelY: 43
   EnableMinimap: 0
   minimapServiceUrl: https://t1.data.amsterdam.nl/topo_rd/{zoom}/{x}/{y}.png
@@ -22,8 +28,8 @@ MonoBehaviour:
   minimapBottomLeftRD_X: -285401.9
   minimapBottomLeftRD_Y: 22598.08
   MinimapZoom0RDSize: 880803.8
-  webserverRootPath: https://3dutrecht.azureedge.net/
-  buildingsMetaDataPath: http://3dutrecht.lab4242.nl/buildings/objectdata/
+  webserverRootPath: http://10.0.0.2:8080/
+  buildingsMetaDataPath: http://10.0.0.2:8080/buildings_rd/
   sharingBaseURL: https://3d.amsterdam.nl/
   sharingSceneSubdirectory: customScene.php?id=
   sharingViewUrl: https://3d.amsterdam.nl/web/app/index.html?view=
@@ -32,7 +38,8 @@ MonoBehaviour:
   sewerageApiType: 1
   sewerPipesWfsUrl: https://api.data.amsterdam.nl/v1/wfs/rioolnetwerk/?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=geojson&srsname=epsg:4258&typeName=rioolleidingen&bbox=
   sewerManholesWfsUrl: https://api.data.amsterdam.nl/v1/wfs/rioolnetwerk/?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=geojson&srsname=epsg:4258&typeName=rioolknopen&bbox=
-  buildingUrl: https://api.data.amsterdam.nl/bag/v1.1/pand/
+  BagApiType: 1
+  buildingUrl: https://3dutechtapi.azurewebsites.net/api/getbag/
   numberIndicatorURL: https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?pand=
   numberIndicatorInstanceURL: https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/
   monumentURL: https://api.data.amsterdam.nl/monumenten/monumenten/?betreft_pand=
