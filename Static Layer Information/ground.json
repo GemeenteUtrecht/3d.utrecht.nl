@@ -1,0 +1,34 @@
+{
+	"title": "Ground data",
+	"fields": [
+		{ "type":"title", "content": "Maaiveld" },
+		{
+			"type": "text",
+			"content": "Het maaiveld, ofwel het oppervlak waarop we lopen' is weergegeven in 3D. De hoogtedata komt van het Actueel Hoogtemodel Nederland (AHN-3), voor Utrecht ingewonnen tussen 2014 en 2016. Van deze data is met behulp van de open source applicatie 3dfier een terreinmodel gemaakt waarbij hoogtedata wordt gecombineerd met een selectie van data uit de Basisregistratie Grootschalige Topografie (BGT). Vervolgens is deze voorzien van texturen zodat de verschillende onderdelen herkenbaar zijn.\n\nDe hoeveelheid data in het terreinmodel is te groot om in zijn geheel te laten zien in 3D Utrecht. Daarom laden we deze per tegel in, waardoor je het maaiveld per vierkant ziet verschijnen. Tevens halen we bepaalde hoogtedetails uit het bestand zodat het mogelijk is om de grote hoeveelheid data zo efficiënt en snel mogelijk te kunnen laten zien. We werken aan een maaiveld waar u op kunt klikken zodat u informatie krijgt over de verschillende onderdelen ervan. Bijvoorbeeld informatie over een weg of een parkeerplaats.\n"
+		},
+		{
+			"type": "seperator_line"
+		},
+		{ "type":"data_field", "key":"Brondata", "content": "BGT" },
+		{ "type":"data_field", "key":"Eigenaar", "content": "Gemeente Utrecht" },
+		{ "type":"data_field", "key":"Datum inwinning", "content": "2021" },
+		{
+			"type": "seperator_line"
+		},
+		{ "type":"data_field", "key":"Brondata", "content": "AHN-3" },
+		{ "type":"data_field", "key":"Eigenaar", "content": "Waterschappen, Provincies" },
+		{ "type":"data_field", "key":"", "content": "en Rijkswaterstaat" },
+		{ "type":"data_field", "key":"Datum inwinning", "content": "2014-2016" },
+		{
+			"type": "seperator_line"
+		},
+		{
+			"type": "title",
+			"content": "Meer informatie op:"
+		},		
+		{ "type":"link", "key":"BGT Utrecht", "content": "https://3d.kadaster.nl/basisvoorziening-3d/" },
+		{ "type":"link", "key":"AHN", "content": "https://www.ahn.nl/" },
+		{ "type":"link", "key":"3dfier op GitHub", "content": "https://github.com/tudelft3d/3dfier" },
+		{ "type":"seperator" }
+	]
+}

@@ -1,0 +1,48 @@
+{
+	"title": "Buildings data",
+	"fields": [
+		{
+			"type": "title",
+			"content": "Gebouwen"
+		},
+		{
+			"type": "text",
+			"content": "Alle objecten op de laag 'Gebouwen' komen uit de 3D BAG. Dit is een up-to-date landsdekkende dataset met 3D gebouwmodellen van Nederland die is gemaakt door de 3D geoinformation onderzoeksgroep van de Technische Universiteit Delft. De set is automatisch gegenereerd met behulp van de 2D BAG contouren icm het Algemeen Hoogtemodel van Nederland, update 3 (AHN3). \n\nIn de gebouwenlaag worden verschillende detailniveaus onderscheiden, ook wel LOD's genoemd. In de 3D viewer zie je standaard meer gedetailleerde gebouwen op de voorgrond (LOD 2.2) en minder gedetailleerde gebouwen verder weg (LOD 1.3). Je kunt de weergave van LOD's ook zelf instellen.\n\nVia 3D Utrecht is het mogelijk vierkante tegels van 100x100 meter te downloaden als .dxf bestand. Bij de opties kun je kiezen welke onderdelen (lagen) je wilt opnemen in de download. Als je gebouwen selecteert, krijg je deze in het LOD niveau zoals je ze op dat moment in de viewer ziet (binnen het geselecteerde gebied).\n"
+		},
+		{
+			"type": "seperator_line"
+		},
+		{
+			"type": "title",
+			"content": "Let op!"
+		},
+		{
+			"type": "text",
+			"content": "Aan het downloaden en gebruik van de 3D BAG zitten voorwaarden. Lees ze hier:"
+		},
+		{
+			"type": "link",
+			"key": "licentie CC BY 4.0 door 3D geoinformation onderzoeksgroep van de TU Delft",
+			"content": "https://docs.3dbag.nl/nl/"
+		},
+		{
+			"type": "seperator_line"
+		},
+		{
+			"type": "title",
+			"content": "Koppeling met data"
+		},
+		{
+			"type": "text",
+			"content": "De gebouwobjecten zijn gekoppeld aan data uit de BAG API van het Kadaster."
+		},
+		{
+			"type": "link",
+			"key": "BAG API van het Kadaster",
+			"content": "https://www.kadaster.nl/zakelijk/producten/adressen-en-gebouwen/bag-api-individuele-bevragingen"
+		},
+		{
+			"type": "seperator"
+		}
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"title": "Sewerage",
+	"fields": [
+		{
+			"type": "title",
+			"content": "Rioolnetwerk"
+		},
+		{
+			"type": "text",
+			"content": "Het is druk in de ondergrond!\nHoe druk gaan we stapsgewijs inzichtelijk maken in 3D Utrecht. De eerste dataset 'ondergronds' is die van het rioolnetwerk. Waternet is de beheerder van deze data en levert gegevens over het netwerk aan de gemeente Utrecht. Vervolgens wordt het als open data aangeboden via het dataportaal.\n\nIn 3D Utrecht zetten we de data om in 3D geometrie en tonen we dit in viewer. Omdat we hierbij gebruik maken van een link naar de data en dit omzetten 'on the fly' doen, kan het een paar seconden duren voor het netwerk zichtbaar wordt. Een wijziging in de databron leidt direct tot wijziging van de riolering in 3D Utrecht.\n"
+		},
+		{
+			"type": "seperator_line"
+		},
+		{ "type":"data_field", "key":"Brondata", "content": "Rioolnetwerk" },
+		{ "type":"data_field", "key":"Beheerder", "content": "Waternet" },
+		{ "type":"data_field", "key":"Datum inwinning", "content": "2021" },
+		{
+			"type": "seperator_line"
+		},
+		{
+			"type": "title",
+			"content": "Meer informatie op:"
+		},		
+		{ "type":"link", "key":"Dataportaal PDOK", "content": "https://www.pdok.nl/" },
+		{ "type":"link", "key":"Waternet", "content": "https://www.waternet.nl/ons-water/rioolwater/gemengd-riool/" },
+		{
+			"type": "seperator"
+		}
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"title": "Trees data",
+	"fields": [
+		{
+			"type": "title",
+			"content": "Bomen"
+		},
+		{
+			"type": "text",
+			"content": "3D Utrecht toont bomen die In beheer zijn bij de gemeente. Dat betekent dat niet elke boom in Utrecht is weergegeven. De bomen op begraafplaatsen, de volkstuincomplexen, grote groengebieden en rond sportvelden zijn niet allemaal in beheer van de gemeente. Verder staan er nog tienduizenden bomen op terreinen van woningbouwcorporaties, ProRail, Rijkswaterstaat en in de duizenden particuliere tuinen.\n\n. De bomen zijn zoveel mogelijk per boomsoort versimpeld in 3D gevisualiseerd conform bomentabel die is opgesteld door Wageningen University & Research. Bomen worden zichtbaar binnen een afstand van 3000m tot de camera.\n"
+		},
+		{
+			"type": "seperator_line"
+		},
+		{ "type":"data_field", "key":"Brondata", "content": "Bomenbestand" },
+		{ "type":"data_field", "key":"Eigenaar", "content": "Gemeente Utrecht" },
+		{ "type":"data_field", "key":"Datum inwinning", "content": "2020" },
+		{ "type":"data_field", "key":"Bewerking", "content": "Bomen 2D > 3D" },
+		{
+			"type": "seperator_line"
+		},
+		{
+			"type": "title",
+			"content": "Meer informatie op:"
+		},		
+		{ "type":"link", "key":"Bomen", "content": "https://www.utrecht.nl/wonen-en-leven/parken-en-groen/bomen/" },
+		{
+			"type": "seperator"
+		}
+	]
+}
