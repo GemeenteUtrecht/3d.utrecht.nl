@@ -127,7 +127,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.2.3.7
+  bundleVersion: 2.4.3
   preloadedAssets:
   - {fileID: 11400000, guid: d5f272a8231831941994b3ff3281aa1d, type: 2}
   metroInputSource: 0
@@ -539,7 +539,7 @@ PlayerSettings:
   monoEnv: 
   splashScreenBackgroundSourceLandscape: {fileID: 0}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
-  blurSplashScreenBackground: 1
+  blurSplashScreenBackground: 0
   spritePackerPolicy: 
   webGLMemorySize: 1024
   webGLExceptionSupport: 0
@@ -648,8 +648,14 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Analytics: 1
     Build: 0
+    Collab: 0
+    Game Performance: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -663,11 +669,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: 9f189369-2b2d-49bf-8a8f-4a297bac8c79
+  cloudProjectId: 295705af-66b0-448d-bde6-5e4378386d70
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: 3D Utrecht
-  organizationId: unity_8o2dczjbjtd9ea
+  organizationId: bart-burkhardt
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0
