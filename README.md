@@ -138,4 +138,14 @@ To create assets the workflow is as follows
 
 Note, the generation these assets can take some time on your computer.
 
+## Third parties and licenses
+- DXF export library - Lesser General Public Licence
+- Sun Script - Credits to Paul Hayes
+- 3D BAG - CC-BY licentie (TU Delft)
+- BruTile (only used for its Extent struct) - Apache License 2.0
 
+- Simple SJON - MIT License
+- Mesh Simplifier - MIT License
+- Clipping Triangles - MIT License
+- scripts/extentions/ListExtensions.cs - MIT License
+- Scripts/RuntimeHandle derivative work - MIT License
