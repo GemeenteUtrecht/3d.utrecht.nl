@@ -1,6 +1,6 @@
 # 3DUtrecht
 
-3D Utrecht is a platform ( soon available at 3d.utrecht.nl ) where the city of Utrecht can be experienced interactively in 3D using a browser using WebGL technology.
+3D Utrecht is a platform ( available at https://3d.utrecht.nl ) where the city of Utrecht can be experienced interactively in 3D using a browser using WebGL technology.
 
 The code of this project is forked from 3DAmsterdam https://github.com/Amsterdam/3DAmsterdam
 
@@ -12,7 +12,7 @@ The main goals are:
 More and more information and data is embedded, allowing future features like running simulations, visualization of solar and wind studies and showing impact of spatial urban changes. It will improve public insight in decision making processes.
 
 ## Unity 2020.3.11f1 (LTS)
-The project is using the latest LTS (long-term support) release of Unity: 2019.4.
+The project is using the latest LTS (long-term support) release of Unity: 2020.3.11f1
 We will stick to this version untill new engine feature updates are required for the sake of maximum stability.
 ## WebGL/Universal Render Pipeline
 Currently the main target platform is a WebGL(2.0) application.
