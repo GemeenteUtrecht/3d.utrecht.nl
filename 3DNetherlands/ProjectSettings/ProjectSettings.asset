@@ -648,7 +648,7 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
-    Analytics: 1
+    Analytics: 0
     Build: 0
     Collab: 0
     Game Performance: 0
@@ -669,11 +669,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: 295705af-66b0-448d-bde6-5e4378386d70
+  cloudProjectId: 962e53af-fe24-411e-a6fa-640fe9e35995
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: 3D Utrecht
-  organizationId: bart-burkhardt
+  organizationId: gemeente-utrecht
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0
