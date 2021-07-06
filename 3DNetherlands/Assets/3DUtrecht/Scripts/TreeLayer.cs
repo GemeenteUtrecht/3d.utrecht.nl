@@ -63,6 +63,9 @@ public class TreeLayer : Layer
 
         if (_tiles.ContainsKey(name) == false)
         {
+            GameObject gam = new GameObject();
+            _tiles.Add(name, gam);
+
             Uri baseUri = new Uri(Config.activeConfiguration.webserverRootPath);
             var uri = new Uri(baseUri, name);
             var tilepos = CoordConvert.RDtoUnity(new Vector3(x, y, 0));
@@ -70,14 +73,14 @@ public class TreeLayer : Layer
             {
                 yield return uwr.SendWebRequest();
 
-                if (!uwr.isNetworkError && !uwr.isHttpError)
+                if (uwr.result != UnityWebRequest.Result.ConnectionError && uwr.result != UnityWebRequest.Result.ProtocolError)
                 {
                     AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(uwr);
 
                      yield return new WaitUntil(() => pauseLoading == false);
 
                     var mesh = assetBundle.LoadAllAssets<Mesh>().First();
-                    GameObject gam = new GameObject();
+                    
                     gam.transform.localScale = Vector3.one * _scale;
                     gam.name = name;
                     gam.transform.parent = transform;
@@ -87,7 +90,6 @@ public class TreeLayer : Layer
 
                     callback(tileChange);
 
-                    _tiles.Add(name, gam);
                 }
             }
         }
