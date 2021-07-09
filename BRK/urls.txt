@@ -1,0 +1,4 @@
+suggest https://geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?q=3829az%2014&rows=1
+lookup https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id=adr-64490b780669a3be3eb26e03c3adbdd7
+kadastralekaart https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=kadastralekaartv4:perceel&STARTINDEX=0&COUNT=1000&SRSNAME=urn:ogc:def:crs:EPSG::28992&BBOX=157772.38590404734713957,466700.03400616615545005,158006.4140959526412189,466864.52599383390042931,urn:ogc:def:crs:EPSG::28992&outputFormat=json
+bebouwing       https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=kadastralekaartv4:bebouwing&STARTINDEX=0&COUNT=1000&SRSNAME=urn:ogc:def:crs:EPSG::28992&BBOX=158006.4140959526412189,466535.54201849841047078,158240.44228785793529823,466700.03400616615545005,urn:ogc:def:crs:EPSG::28992&outputFormat=json

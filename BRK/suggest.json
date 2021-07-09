@@ -1,0 +1,27 @@
+{
+  "response":{"numFound":1,"start":0,"maxScore":17.558924,"docs":[
+      {
+        "type":"adres",
+        "weergavenaam":"De Maalderij 14, 3829AZ Hooglanderveen",
+        "id":"adr-64490b780669a3be3eb26e03c3adbdd7",
+        "score":17.558924}]
+  },
+  "highlighting":{
+    "adr-64490b780669a3be3eb26e03c3adbdd7":{
+      "suggest":["De Maalderij <b>14</b>, <b>3829AZ</b> Hooglanderveen"]}},
+  "spellcheck":{
+    "suggestions":[
+      "3829az",{
+        "numFound":3,
+        "startOffset":0,
+        "endOffset":6,
+        "suggestion":["3829ab",
+          "3829ad",
+          "3829"]}],
+    "collations":[
+      "collation",{
+        "collationQuery":"3829ad 14",
+        "hits":1,
+        "misspellingsAndCorrections":[
+          "3829az","3829ad",
+          "14","14"]}]}}
