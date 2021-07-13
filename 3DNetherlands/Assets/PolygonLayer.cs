@@ -1,14 +1,20 @@
+using ConvertCoordinates;
 using Netherlands3D.LayerSystem;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PolygonLayer : Layer
 {
+	public Material LineMaterial;
+
+
     public override void HandleTile(TileChange tileChange, Action<TileChange> callback = null)
     {
 		TileAction action = tileChange.action;
@@ -52,106 +58,78 @@ public class PolygonLayer : Layer
 	{
 		var bbox = tile.tileKey.x + "," + tile.tileKey.y + "," + (tile.tileKey.x + tileSize) + "," + (tile.tileKey.y + tileSize);
 		string url = $"https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=kadastralekaartv4:perceel&STARTINDEX=0&COUNT=1000&SRSNAME=urn:ogc:def:crs:EPSG::28992&BBOX={bbox},urn:ogc:def:crs:EPSG::28992&outputFormat=json";
-		var polygonsPerceel = GetPerceelPolygon(url);
 
-		//RenderPolygons(polygonsPerceel, center, PerceelMaterial, Perceel);
+		List<Vector2[]> list = new List<Vector2[]>();
+
+		tile.runningWebRequest = UnityWebRequest.Get(url);
+		yield return tile.runningWebRequest.SendWebRequest();
+
+		if (tile.runningWebRequest.result == UnityWebRequest.Result.Success)
+		{
+			using (JsonTextReader reader = new JsonTextReader(new StringReader(tile.runningWebRequest.downloadHandler.text)))
+			{
+				reader.SupportMultipleContent = true;
+				var serializer = new JsonSerializer();
+				JsonModels.WebFeatureService.WFSRootobject wfs = serializer.Deserialize<JsonModels.WebFeatureService.WFSRootobject>(reader);
+
+				yield return null;
+
+				foreach (var feature in wfs.features)
+				{
+					List<Vector2> polygonList = new List<Vector2>();
+
+					var coordinates = feature.geometry.coordinates;
+					foreach (var points in coordinates)
+					{
+						foreach (var point in points)
+						{
+							polygonList.Add(new Vector2(point[0], point[1]));
+						}
+					}
+					list.Add(polygonList.ToArray());
+				}
+
+			}
+
+		}
+
+
+		StartCoroutine (RenderPolygons(list, LineMaterial, tile));
 
 		//Finaly activate our new tile gameobject (if layer is not disabled)
 		tile.gameObject.SetActive(isEnabled);
-
-		yield return new WaitForEndOfFrame();
 
 		yield return null;
 		callback(tileChange);
 	}
 
-	List<Vector2[]> GetPerceelPolygon(string url)
+
+	IEnumerator RenderPolygons(List<Vector2[]> polygons, Material material, Tile tile)
 	{
-		List<Vector2[]> list = new List<Vector2[]>();
-
-		using (WebClient client = new WebClient())
-		using (Stream stream = client.OpenRead(url))
-		using (StreamReader streamReader = new StreamReader(stream))
-		using (JsonTextReader reader = new JsonTextReader(streamReader))
-		{
-			reader.SupportMultipleContent = true;
-			var serializer = new JsonSerializer();
-			JsonModels.WebFeatureService.WFSRootobject wfs = serializer.Deserialize<JsonModels.WebFeatureService.WFSRootobject>(reader);
-
-			foreach (var feature in wfs.features)
-			{
-				List<Vector2> polygonList = new List<Vector2>();
-
-				var coordinates = feature.geometry.coordinates;
-				foreach (var points in coordinates)
-				{
-					foreach (var point in points)
-					{
-						polygonList.Add(new Vector2(point[0], point[1]));
-					}
-				}
-				list.Add(polygonList.ToArray());
-			}
-		}
-
-		return list;
-	}
-
-	void RenderPolygons(List<Vector2[]> polygons, Vector2 center, Material material, Transform parent)
-	{
-		
-		foreach (var polygon in polygons)
-		{
-			List<int> indices = new List<int>();
-			List<Vector3> points = new List<Vector3>();
-
-			foreach (var point in polygon)
-			{
-				points.Add(new Vector3(point.x - center.x, 0, point.y - center.y));
-			}
-
-			for (int i = 0; i < polygon.Length-1; i++)
-			{
-				indices.Add(i);
-				indices.Add(i+1);
-			}
-		}
-	}
-
-	void RenderPolygon(Vector2[] polygonPoints, Material lineMaterial, Vector2 center, Transform parent)
-	{
-
+		List<Vector2> vertices = new List<Vector2>();
 		List<int> indices = new List<int>();
-		List<Vector3> points = new List<Vector3>();
 
-		foreach (var point in polygonPoints)
+		int count = 0;
+		foreach (var list in polygons)
 		{
-			points.Add(new Vector3(point.x - center.x, 0, point.y - center.y));
-		}
-
-		for (int i = 0; i < polygonPoints.Length; i++)
-		{
-			indices.Add(i);
-
-			if (i == polygonPoints.Length - 1)
+			for (int i = 0; i < list.Length - 1; i++)
 			{
-				indices.Add(0);
+				indices.Add(count + i);
+				indices.Add(count + i + 1);
 			}
-			else
-			{
-				indices.Add(i + 1);
-			}
+			count += list.Length;
+			vertices.AddRange(list);			
 		}
 
 		GameObject newgameobject = new GameObject();
-		newgameobject.transform.parent = parent;
-
+		newgameobject.transform.transform.SetParent(tile.gameObject.transform, false); ;
 		MeshFilter filter = newgameobject.AddComponent<MeshFilter>();
-		// newgameobject.AddComponent<Renderer>();
-		newgameobject.AddComponent<MeshRenderer>().material = lineMaterial;
+		newgameobject.AddComponent<MeshRenderer>().material = material;
+
+		yield return null;
 
 		var mesh = new Mesh();
-		mesh.vertices = points.ToArray();
+		mesh.vertices = vertices.Select(o => CoordConvert.RDtoUnity(o)).ToArray();
 		mesh.SetIndices(indices.ToArray(), MeshTopology.Lines, 0);
 		filter.sharedMesh = mesh;
 	}
