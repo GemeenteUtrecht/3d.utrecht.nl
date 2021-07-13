@@ -37,8 +37,8 @@ public class CreatePolygon : MonoBehaviour
 
         var testpolygon = GetTestPolygon();
         var testpolygon2 = GetTestPolygon2();
-        var testpolygonSquareClockwise = GetTestPolygonSquareClockwise();
-        var testpolygonSquareCounterClockwise = GetTestPolygonSquareCounterClockwise();
+ //       var testpolygonSquareClockwise = GetTestPolygonSquareClockwise();
+ //       var testpolygonSquareCounterClockwise = GetTestPolygonSquareCounterClockwise();
         var polygonsPerceel = GetPerceelPolygon(url);
         var polygonsBebouwing = GetBebouwingPolygons(url_bebouwing);
 
@@ -52,15 +52,18 @@ public class CreatePolygon : MonoBehaviour
 
         //RenderPolygons(testpolygon2, center, PerceelMaterial, Perceel);
         //RenderPolygons(testpolygon, center, PerceelMaterial, Perceel);
+        //RenderPolygons(polygonsPerceel, center, PerceelMaterial, Perceel);
         RenderPolygons(polygonsPerceel, center, PerceelMaterial, Perceel);
 
+
         //RenderConvexPolygons(polygonsBebouwing.Take(1).ToList(), center, BebouwingMaterial, Bebouwing);
-        RenderConvexPolygons(polygonsBebouwing, center, BebouwingMaterial, Bebouwing);
+        //RenderConvexPolygons(polygonsBebouwing, center, BebouwingMaterial, Bebouwing);
         //RenderConvexPolygons(testpolygon, center, BebouwingMaterial, Bebouwing);
         //RenderConvexPolygons(testpolygon2, center, BebouwingMaterial, Bebouwing);
         //RenderConvexPolygons(testpolygonSquareClockwise, center, BebouwingMaterial, Bebouwing);
         //RenderConvexPolygons(testpolygonSquareCounterClockwise, center, BebouwingMaterial, Bebouwing);
 
+        //TestTwoPolygons();
 
     }
 
@@ -73,13 +76,60 @@ public class CreatePolygon : MonoBehaviour
         }
     }
 
+    void TestTwoPolygons()
+    {
+        List<Vector2[]> polygons = new List<Vector2[]>();
 
-    void RenderPolygons(List<Vector2[]> polygons, Vector2 center, Material material, Transform parent){
-        foreach (var polygon in polygons)
-        {
-            RenderPolygon(polygon, material, center, parent);
-}
+        List<Vector2> pol1 = new List<Vector2>();
+        pol1.Add(new Vector2(0, 0));
+        pol1.Add(new Vector2(0, 4));
+        pol1.Add(new Vector2(4, 4));
+        pol1.Add(new Vector2(4, 0));
+        pol1.Add(new Vector2(0, 0));
+
+        List<Vector2> pol2 = new List<Vector2>();
+        pol2.Add(new Vector2(10, 10));
+        pol2.Add(new Vector2(10, 14));
+        pol2.Add(new Vector2(14, 14));
+        pol2.Add(new Vector2(14, 10));
+        pol2.Add(new Vector2(10, 10));
+
+        polygons.Add(pol1.ToArray());
+        polygons.Add(pol2.ToArray());
+
+        RenderPolygons(polygons, new Vector2(5, 7), BebouwingMaterial, transform);
+
     }
+
+
+    void RenderPolygons(List<Vector2[]> polygons, Vector2 center, Material material, Transform parent)
+    {
+        List<Vector2> vertices = new List<Vector2>();
+        List<int> indices = new List<int>();
+
+        int count = 0;
+        foreach (var list in polygons)
+        {
+            for (int i = 0; i < list.Length - 1; i++)
+            {
+                indices.Add(count + i);
+                indices.Add(count + i + 1);
+            }
+            count += list.Length;
+            vertices.AddRange(list);
+        }
+
+        GameObject newgameobject = new GameObject();
+        newgameobject.transform.parent = parent;
+        MeshFilter filter = newgameobject.AddComponent<MeshFilter>();
+        newgameobject.AddComponent<MeshRenderer>().material = material;
+
+        var mesh = new Mesh();
+        mesh.vertices = vertices.Select(o => new Vector3(o.x -center.x ,0,o.y - center.y )).ToArray();
+        mesh.SetIndices(indices.ToArray(), MeshTopology.Lines, 0);
+        filter.sharedMesh = mesh;       
+    }
+
 
     Vector2 GetCenter(List<Vector2[]> polygons)
     {
@@ -242,44 +292,7 @@ public class CreatePolygon : MonoBehaviour
         return polygons;
     }
 
-
-
-    void RenderPolygon(Vector2[] polygonPoints, Material lineMaterial, Vector2 center, Transform parent)
-    {
-
-        List<int> indices = new List<int>();
-        List<Vector3> points = new List<Vector3>();
-
-        foreach (var point in polygonPoints){
-            points.Add(new Vector3(point.x - center.x, 0, point.y-center.y));
-        }
-
-        for (int i = 0; i < polygonPoints.Length; i++){
-            indices.Add(i);
-
-            if (i == polygonPoints.Length - 1)
-            {
-                indices.Add(0);
-            }
-            else
-            {
-                indices.Add(i + 1);
-            }
-        }
-
-        GameObject newgameobject = new GameObject();
-        newgameobject.transform.parent = parent;
-
-        MeshFilter filter = newgameobject.AddComponent<MeshFilter>();
-       // newgameobject.AddComponent<Renderer>();
-        newgameobject.AddComponent<MeshRenderer>().material = lineMaterial;
-
-        var mesh = new Mesh();
-        mesh.vertices = points.ToArray();
-        mesh.SetIndices(indices.ToArray(), MeshTopology.Lines, 0);
-        filter.sharedMesh = mesh;
-    }
-
+ 
     //http://wiki.unity3d.com/index.php?title=Triangulator
     void RenderPolygonConvex(Vector2[] polygonPoints, Material lineMaterial, Vector2 center, Transform parent)
     {

@@ -54,7 +54,7 @@ public class PolygonLayer : Layer
 		string url = $"https://geodata.nationaalgeoregister.nl/kadastralekaart/wfs/v4_0?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=kadastralekaartv4:perceel&STARTINDEX=0&COUNT=1000&SRSNAME=urn:ogc:def:crs:EPSG::28992&BBOX={bbox},urn:ogc:def:crs:EPSG::28992&outputFormat=json";
 		var polygonsPerceel = GetPerceelPolygon(url);
 
-		RenderPolygons(polygonsPerceel, center, PerceelMaterial, Perceel);
+		//RenderPolygons(polygonsPerceel, center, PerceelMaterial, Perceel);
 
 		//Finaly activate our new tile gameobject (if layer is not disabled)
 		tile.gameObject.SetActive(isEnabled);
