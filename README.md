@@ -75,6 +75,8 @@ mklink /d Netherlands3D \3DAmsterdam.fork\3DAmsterdam\Assets\Netherlands3D
 This completes the setup of the file structure. 
 The Webgl directory Fullscreen3DAmsterdam can be copied and made custom
 
+For further documentation please visit our partnersite https://github.com/Amsterdam/3DAmsterdam/tree/master/docs
+
 ## Unity Input System
 
 The project uses the new Unity input system called Input Action Assets. The input mappings are defined in 
