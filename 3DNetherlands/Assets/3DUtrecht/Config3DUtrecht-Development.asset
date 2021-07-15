@@ -28,7 +28,7 @@ MonoBehaviour:
   minimapBottomLeftRD_X: -285401.9
   minimapBottomLeftRD_Y: 22598.08
   MinimapZoom0RDSize: 880803.8
-  webserverRootPath: http://10.0.0.2:8080/
+  webserverRootPath: E:/testomgeving
   buildingsMetaDataPath: http://10.0.0.2:8080/buildings_rd/
   sharingBaseURL: https://3d.amsterdam.nl/
   sharingSceneSubdirectory: customScene.php?id=
