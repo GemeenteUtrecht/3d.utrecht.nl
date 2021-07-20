@@ -29,7 +29,7 @@ For variable naming please refer to:
 ## Project Setup 
 
 The project consists of two repositories. One is the 3DAmsterdam repository, the other is a city specific repository, in our case this is 3DUtrecht. 
-Unity will use the 3DUtrecht directory to load the project. From the 3DUtrecht project we will use symbolic links to some 3DAmsterdam directories. This way we can reuse code. A symbolic link can be used to act like shortcut to other files or directories. More info on that can be found [here](https://en.wikipedia.org/wiki/Symbolic_link)
+Unity will use the 3DUtrecht directory to load the project. From the 3DUtrecht project we will use symbolic links to two 3DAmsterdam directories. This way we can reuse code. A symbolic link can be used to act like shortcut to other files or directories. More info on that can be found [here](https://en.wikipedia.org/wiki/Symbolic_link)
 
 The files structure of the project looks like this. 
 
