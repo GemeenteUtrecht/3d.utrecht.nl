@@ -28,6 +28,9 @@ For variable naming please refer to:
 
 ## Project Setup 
 
+The project consists of two repositories. One is the 3DAmsterdam repository, the other is a city specific repository, in our case this is 3DUtrecht. 
+Unity will use the 3DUtrecht directory to load the project. From the 3DUtrecht project we will use symbolic links to some 3DAmsterdam directories. This way we can reuse code. A symbolic link can be used to act like shortcut to other files or directories. More info on that can be found [here](https://en.wikipedia.org/wiki/Symbolic_link)
+
 The files structure of the project looks like this. 
 
 ```
@@ -53,15 +56,15 @@ The files structure of the project looks like this.
 
 To setup the file structure the following steps should be performed
 
-1. If you want the latest update of the 3DAmsterdam project, you have to update the fork with the latest data from https://github.com/Amsterdam/3Damsterdam 
-   To do this: setup two origins in your git client. Name them Amsterdam and fork. 
-   Amsterdam points to https://github.com/Amsterdam/3Damsterdam Fork points to https://github.com/GemeenteUtrecht/3DAmsterdam
-   Every time you want to update your fork to the latest code, pull it from origin Amsterdam.
+1. Fork the [3DAmsterdam](https://github.com/Amsterdam/3Damsterdam) repository and checkout to your computer, example c:\development\3damsterdam.fork
+   
+2. Setup two origins in your git client for this repository. Name them Amsterdam and Fork. 
+   Amsterdam points to https://github.com/Amsterdam/3Damsterdam 
+   Fork points to https://github.com/GemeenteUtrecht/3DAmsterdam
+   Every time you want to update your fork to the latest code from 3DAmsterdam, pull it from origin Amsterdam.
+   When you made code changes in this directory you can create a branch and push this Fork. Then you can make a pull request that can be picked up by the 3DAmsterdam development team. This way you can contribute to the opensource project!
 
-2. Clone code from https://github.com/GemeenteUtrecht/3DAmsterdam to 3DAmsterdam.fork 
-    
-
-3. Clone code from https://github.com/GemeenteUtrecht/3d.utrecht.nl to 3d.utrecht.nl
+3. Checkout code from https://github.com/GemeenteUtrecht/3d.utrecht.nl to for example c:\development\3d.utrecht.nl
 
 4. Add symbolic links as shown below, make sure the drive supports symbolic links. For Windows this only works on NTFS volumes
 
@@ -72,10 +75,17 @@ mklink /d 3DAmsterdam \3DAmsterdam.fork\3DAmsterdam\Assets\3DAmsterdam
 mklink /d Netherlands3D \3DAmsterdam.fork\3DAmsterdam\Assets\Netherlands3D
 ```
 
-This completes the setup of the file structure. 
-The Webgl directory Fullscreen3DAmsterdam can be copied and made custom
+6. Lastly add the symbolic linked directories in the .gitignore file as follows
 
-For further documentation please visit our partnersite https://github.com/Amsterdam/3DAmsterdam/tree/master/docs
+```
+3DNetherlands/Assets/3DAmsterdam*
+3DNetherlands/Assets/Netherlands3D*
+```
+
+This completes the setup of the file structure. 
+The WebGL directory Fullscreen3DAmsterdam can be copied and made custom
+
+For further documentation check the 3DAmsterdam documentation at https://github.com/Amsterdam/3DAmsterdam/tree/develop/docs
 
 ## Unity Input System
 
