@@ -161,3 +161,4 @@ Note, the generation these assets can take some time on your computer.
 - Clipping Triangles - MIT License
 - scripts/extentions/ListExtensions.cs - MIT License
 - Scripts/RuntimeHandle derivative work - MIT License
+- Mesh Combine Wizard - MIT License
