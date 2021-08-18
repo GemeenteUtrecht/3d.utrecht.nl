@@ -22,12 +22,6 @@ MonoBehaviour:
     x: 146000
     y: 464000
   zeroGroundLevelY: 0
-  EnableMinimap: 0
-  minimapServiceUrl: https://t1.data.amsterdam.nl/topo_rd/{zoom}/{x}/{y}.png
-  MinimapTileNumberingType: 0
-  minimapBottomLeftRD_X: -285401.9
-  minimapBottomLeftRD_Y: 22598.08
-  MinimapZoom0RDSize: 880803.8
   webserverRootPath: https://3d.utrecht.nl/
   buildingsMetaDataPath: https://3d.utrecht.nl/buildings_rd/
   sharingBaseURL: https://3d.amsterdam.nl/
