@@ -23,7 +23,7 @@ MonoBehaviour:
     y: 464000
   zeroGroundLevelY: 0
   webserverRootPath: http://192.168.2.177:8080/
-  buildingsMetaDataPath: http://192.168.2.177:8080/buildings_rd_500/
+  buildingsMetaDataPath: http://192.168.2.177:8080/buildings_rd/
   sharingBaseURL: https://3d.amsterdam.nl/
   sharingSceneSubdirectory: customScene.php?id=
   sharingViewUrl: https://3d.amsterdam.nl/web/app/index.html?view=
