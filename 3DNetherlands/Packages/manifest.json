@@ -16,6 +16,7 @@
     "com.unity.purchasing": "3.1.0",
     "com.unity.render-pipelines.universal": "10.5.0",
     "com.unity.test-framework": "1.1.24",
+    "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.4.8",
     "com.unity.ugui": "1.0.0",
     "com.unity.xr.legacyinputhelpers": "2.1.7",
@@ -52,13 +53,5 @@
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
   },
-  "scopedRegistries": [
-    {
-      "name": "com.Gemeente_Utrecht.drieD_Utrecht",
-      "url": "https://3d.utrecht.nl",
-      "scopes": [
-        "2.7.2"
-      ]
-    }
-  ]
+  "scopedRegistries": []
 }
