@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b758a88e677e1c147be0319c4447ddc3, type: 3}
   m_Name: testomgeving 1
   m_EditorClassIdentifier: 
   RelativeCenterRD:
