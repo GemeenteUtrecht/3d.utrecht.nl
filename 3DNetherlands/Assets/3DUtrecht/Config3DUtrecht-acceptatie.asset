@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b758a88e677e1c147be0319c4447ddc3, type: 3}
-  m_Name: Config3DUtrecht-Development
+  m_Name: Config3DUtrecht-acceptatie
   m_EditorClassIdentifier: 
   RelativeCenterRD:
     x: 136776
@@ -22,11 +22,13 @@ MonoBehaviour:
     x: 146000
     y: 464000
   zeroGroundLevelY: 0
-  webserverRootPath: https://acc3dutrechtstorage.z6.web.core.windows.net/
-  buildingsMetaDataPath: https://acc3dutrechtstorage.z6.web.core.windows.net/buildings_rd/
-  sharingBaseURL: https://3d.amsterdam.nl/
-  sharingSceneSubdirectory: customScene.php?id=
-  sharingViewUrl: https://3d.utrecht.nl/?view=
+  webserverRootPath: https://acc.3d.utrecht.nl/
+  buildingsMetaDataPath: https://acc.3d.utrecht.nl/buildings_rd/
+  sharingUploadScenePath: https://3d.amsterdam.nl/customUpload.php
+  sharingDownloadScenePath: https://3d.amsterdam.nl/customScene.php?id={sceneId}_scene.json
+  sharingUploadModelPath: https://3d.amsterdam.nl/customUpload.php?sceneId={sceneId}&meshToken={modelToken}
+  sharingDownloadModelPath: https://3d.amsterdam.nl/customScene.php?id={modelToken}.dat
+  sharingViewScenePath: https://3d.amsterdam.nl/web/app/index.html?view={sceneId}
   LocationSuggestionUrl: https://geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?q={SEARCHTERM}%20and%20Utrecht%20&rows=5
   LookupUrl: https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id={ID}
   sewerageApiType: 1
