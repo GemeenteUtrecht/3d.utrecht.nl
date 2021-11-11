@@ -23,7 +23,7 @@ MonoBehaviour:
     y: 464000
   zeroGroundLevelY: 0
   webserverRootPath: https://3d.utrecht.nl/
-  buildingsMetaDataPath: https://3d.utrecht.nl/buildings_rd/
+  buildingsMetaDataPath: buildings_rd/
   sharingUploadScenePath: https://3d.amsterdam.nl/customUpload.php
   sharingDownloadScenePath: https://3d.amsterdam.nl/customScene.php?id={sceneId}_scene.json
   sharingUploadModelPath: https://3d.amsterdam.nl/customUpload.php?sceneId={sceneId}&meshToken={modelToken}
